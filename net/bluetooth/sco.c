@@ -195,7 +195,7 @@ static int sco_connect(struct sock *sk)
 	else
 		type = SCO_LINK;
 
-	hcon = hci_connect(hdev, type, dst, BT_SECURITY_LOW, HCI_AT_NO_BONDING);
+	hcon = hci_connect(hdev, type, hdev->pkt_type, dst, BT_SECURITY_LOW, HCI_AT_NO_BONDING);
 	if (IS_ERR(hcon)) {
 		err = PTR_ERR(hcon);
 		goto done;
@@ -939,7 +939,7 @@ static int sco_connect_cfm(struct hci_conn *hcon, __u8 status)
 
 static int sco_disconn_cfm(struct hci_conn *hcon, __u8 reason)
 {
-	BT_DBG("hcon %p reason %d", hcon, reason);
+	BT_DBG("hcon reason %d", reason);
 
 	if (hcon->type != SCO_LINK && hcon->type != ESCO_LINK)
 		return -EINVAL;
@@ -1030,7 +1030,7 @@ static struct hci_proto sco_hci_proto = {
 	.id		= HCI_PROTO_SCO,
 	.connect_ind	= sco_connect_ind,
 	.connect_cfm	= sco_connect_cfm,
-	.disconn_cfm	= sco_disconn_cfm,
+	//.disconn_cfm	= sco_disconn_cfm,
 	.recv_scodata	= sco_recv_scodata
 };
 
