@@ -40,7 +40,7 @@ void *memcpy(void *__dest, __const void *__src, size_t __n)
 	return __dest;
 }
 
-void *memmove(void *__dest, __const void *__src, size_t count)
+/*void *memmove(void *__dest, __const void *__src, size_t count)
 {
 	unsigned char *d = __dest;
 	const unsigned char *s = __src;
@@ -54,7 +54,7 @@ void *memmove(void *__dest, __const void *__src, size_t count)
 	while (count--)
 		d[count] = s[count];
 	return __dest;
-}
+}*/
 
 size_t strlen(const char *s)
 {
